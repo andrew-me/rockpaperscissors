@@ -1,4 +1,7 @@
-import print from '../src/js/module';
+/* eslint-env mocha */
+/* global expect:false */
+
+import print from '../module';
 
 describe('example module', () => {
 
