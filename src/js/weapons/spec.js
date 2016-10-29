@@ -12,6 +12,18 @@ describe('weapons', () => {
     expect(allWeapons[0].id).to.equal(weaponsData[0].id);
 	});
 
+  it('should return random weapon', () => {
+
+	});
+
+  it('should filter weapons by id', () => {
+
+	});
+
+  it('should declare winning weapon', () => {
+
+	});
+
 });
 
 function makeDummyWeaponsData() {
