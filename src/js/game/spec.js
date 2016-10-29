@@ -34,6 +34,14 @@ describe('game', () => {
 
 	});
 
+  it('should play a turn', () => {
+
+	});
+
+  it('should indicate winning player', () => {
+
+	});
+
 });
 
 function makeDummyGameData() {
