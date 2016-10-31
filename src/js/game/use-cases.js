@@ -6,7 +6,8 @@ export {
   addPlayer,
   addWeapons,
   play,
-  checkIfWinner
+  checkIfWinner,
+  getPlayerScore
 };
 
 function iterate(game) {
@@ -78,6 +79,11 @@ function checkIfWinner(game){
   }
 
   return winner;
+}
+
+function getPlayerScore(game, userId) {
+  const player = game.players.filter(player => player.id === userId);
+  return player[0].score;
 }
 
 function validateGame(game) {
