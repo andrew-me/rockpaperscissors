@@ -1,5 +1,5 @@
 require('../css/main.scss');
 
-import print from './module';
-
-print('it works well!');
+import { data, getHumanUser, getBotUser, filterUsersById } from './users';
+import { data, getWeapons } from './weapons';
+import { data, reset, getState, addPlayer, addWeapons, play, checkIfWinner } from './game';
