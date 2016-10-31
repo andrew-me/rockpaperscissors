@@ -8,5 +8,6 @@ export const data = {
     id: null,
     score: 0
   }],
-  weapons: null
+  weapons: null,
+  message: null
 };

@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 /* global expect:false */
 
-import { iterate, reset, getState, addPlayer, addWeapons } from './use-cases';
+import { iterate, reset, getState, addPlayer, addWeapons, play, checkIfWinner } from './use-cases';
 
 describe('game', () => {
 
@@ -63,11 +63,30 @@ describe('game', () => {
 	});
 
   it('should play a turn', () => {
+    let gameData = makeDummyGameData();
+    const weapons = makeDummyWeapons();
+    gameData = addWeapons(gameData, weapons);
+    gameData = addPlayer(gameData, 0);
+    gameData = addPlayer(gameData, 1);
 
+    const playedGameData = play(gameData, 0, 2);
+
+    expect(playedGameData.iteration).to.equal(1);
+    expect(playedGameData.message).to.equal(weapons.items[0].beats[0].message);
+    expect(playedGameData.players[0].score).to.equal(1);
+    expect(playedGameData.players[1].score).to.equal(0);
 	});
 
   it('should indicate winning player', () => {
+    let gameData = makeDummyGameData();
+    gameData = addPlayer(gameData, 0);
+    gameData = addPlayer(gameData, 1);
+    gameData.iteration = gameData.target;
+    gameData.players[0].score = 4;
+    gameData.players[1].score = 1;
 
+    const winner = checkIfWinner(gameData);
+    expect(winner).to.equal(0);
 	});
 
 });
@@ -77,7 +96,8 @@ function makeDummyGameData() {
     target: 5,
     iteration: 0,
     players: [],
-    weapons: null
+    weapons: null,
+    message: null
   };
 
 	return game;
@@ -85,7 +105,15 @@ function makeDummyGameData() {
 
 function makeDummyWeapons() {
   const weapons = {
-    getAllWeapons: function(){},
+    getAllWeaponsData: function(){},
+    getRandomWeapon: function(){},
+    filterWeaponsById: function(){},
+    declareWinner: function(){
+      return {
+        id: 0,
+        message: 'Paper wraps Stone'
+      }
+    },
     items: [{
       id: 0,
       name: 'Paper',
