@@ -1,5 +1,5 @@
 import { data } from './data';
-import { reset, getState, init, addPlayer, addWeapons, play, checkIfWinner } from './use-cases';
+import { reset, getState, init, addPlayer, addWeapons, play, checkIfWinner, getPlayerScore } from './use-cases';
 
 export {
   data,
@@ -9,5 +9,6 @@ export {
   addPlayer,
   addWeapons,
   play,
-  checkIfWinner
+  checkIfWinner,
+  getPlayerScore
 };
