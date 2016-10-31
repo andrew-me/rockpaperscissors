@@ -10,6 +10,9 @@ function getWeapons(weapons) {
   validateWeapons(weapons);
   return {
     getAllWeaponsData: getAllWeaponsData,
+    getRandomWeapon: getRandomWeapon,
+    filterWeaponsById: filterWeaponsById,
+    declareWinner: declareWinner,
     items: weapons
   }
 }
