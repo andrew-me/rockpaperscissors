@@ -4,7 +4,7 @@ export {
 
 function renderUser(user) {
   return (`<div class="user">
-    <h2>${user.name}</h2>
-    <p>${user.type}</p>
+    <h2 class="user__name">${user.name}</h2>
+    <p class="user__type">${user.type}</p>
   </div>`);
 }
