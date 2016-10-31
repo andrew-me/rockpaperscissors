@@ -2,6 +2,7 @@ export {
   iterate,
   reset,
   getState,
+  init,
   addPlayer,
   addWeapons,
   play,
@@ -28,6 +29,14 @@ function getState(game) {
   if(game.iteration === 0) return 'start';
   if(game.iteration === game.target) return 'end';
   return 'playing';
+}
+
+function init(game, userId1, userId2, weapons) {
+  validateGame(game);
+  game = addPlayer(game, userId1);
+  game = addPlayer(game, userId2);
+  game = addWeapons(game, weapons);
+  return game;
 }
 
 function addPlayer(game, id) {

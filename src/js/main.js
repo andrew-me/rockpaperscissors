@@ -1,9 +1,13 @@
 require('../css/main.scss');
 
-import { userData, getHumanUser, getBotUser, filterUsersById } from './users';
-import { weaponsData, getWeapons } from './weapons';
-import { gameData, reset, getState, addPlayer, addWeapons, play, checkIfWinner } from './game';
+import { data as userData, getHumanUser, getBotUser } from './users';
+import { data as weaponsData, getWeapons } from './weapons';
+import { data as gameData, init } from './game';
 
-const humanUser = getHumanUser(userData);
-const botUser = getBotUser(userData);
-const weapons = getWeapons(weaponsData);
+const humanUser = getHumanUser(userData.users);
+const botUser = getBotUser(userData.users);
+const weapons = getWeapons(weaponsData.weapons);
+
+let game = init(gameData, botUser.id, humanUser.id, weapons);
+
+console.log(game);
