@@ -55,7 +55,7 @@ function addWeapons(game, weapons) {
 
 function play(game, player1Weapon, player2Weapon) {
   validateGame(game);
-  const winner = game.weapons.declareWinner(game.weapons, player1Weapon, player2Weapon);
+  const winner = game.weapons.declareWinner(game.weapons.items, player1Weapon, player2Weapon);
   game.iteration++;
   game.players.forEach(
     function(item){
