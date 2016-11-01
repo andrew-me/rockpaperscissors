@@ -24,7 +24,7 @@ console.log(game);
 console.log(renderUser(humanUser, getPlayerScore(game, humanUser.id)));
 console.log(renderUser(botUser, getPlayerScore(game, botUser.id)));
 console.log(renderWeapons(weapons.items, weaponAction));
-const weaponsHTML = renderWeapons(weapons.items, doSomething);
+const weaponsHTML = renderWeapons(weapons.items, weaponAction);
 const app = document.getElementById('app');
 console.log(app);
 app.appendChild(weaponsHTML);
