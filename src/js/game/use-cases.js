@@ -56,6 +56,8 @@ function addWeapons(game, weapons) {
 
 function play(game, player1Weapon, player2Weapon) {
   validateGame(game);
+  if(checkIfWinner(game) !== null) return game;
+
   const winningWeapon = game.weapons.declareWinner(game.weapons.items, player1Weapon, player2Weapon);
   game.iteration++;
   game.message = winningWeapon.message;

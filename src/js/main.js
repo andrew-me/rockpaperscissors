@@ -19,7 +19,7 @@ const weaponAction = function(weaponId){
     const winnerId = checkIfWinner(game);
     if(winnerId !== null){
       const winner = filterUsersById(userData.users, winnerId);
-      game.message += ` Winner! ${winner.name}`;
+      game.message = `Winner! ${winner.name}`;
     }
     render();
   }

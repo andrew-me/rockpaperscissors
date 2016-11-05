@@ -101,6 +101,22 @@ describe('game', () => {
     expect(playedGameData.players[1].currentWeapon).to.equal(0);
 	});
 
+  it('should not play a turn if already a winner', () => {
+    let gameData = makeDummyGameData();
+    const weapons = makeDummyWeapons();
+    gameData = addWeapons(gameData, weapons);
+    gameData = addPlayer(gameData, 0);
+    gameData = addPlayer(gameData, 1);
+    gameData.iteration = gameData.target;
+    gameData.players[0].id = 0;
+    gameData.players[0].score = 4;
+
+    play(gameData, 2, 0);
+
+    expect(gameData.iteration).to.equal(gameData.target);
+    expect(gameData.players[0].score).to.equal(4);
+	});
+
   it('should indicate winning player', () => {
     let gameData = makeDummyGameData();
     gameData = addPlayer(gameData, 0);
