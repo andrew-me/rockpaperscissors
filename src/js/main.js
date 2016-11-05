@@ -1,8 +1,8 @@
 require('../css/main.scss');
 
-import { data as userData, getHumanUser, getBotUser, renderUser } from './users';
+import { data as userData, getHumanUser, getBotUser, renderUser, filterUsersById } from './users';
 import { data as weaponsData, getWeapons, filterWeaponsById, renderWeapons, renderWeapon } from './weapons';
-import { data as gameData, init, getPlayerScore, play } from './game';
+import { data as gameData, init, getPlayerScore, play, checkIfWinner } from './game';
 
 const app = document.getElementById('app');
 
@@ -16,6 +16,11 @@ const weaponAction = function(weaponId){
   return function(){
     const randomWeapon = weapons.getRandomWeapon(weaponsData.weapons);
     game = play(game, weaponId, randomWeapon.id);
+    const winnerId = checkIfWinner(game);
+    if(winnerId){
+      const winner = filterUsersById(userData.users, winnerId);
+      game.message += ` Winner! ${winner.name}`;
+    }
     render();
   }
 }

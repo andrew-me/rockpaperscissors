@@ -76,11 +76,12 @@ function play(game, player1Weapon, player2Weapon) {
 
 function checkIfWinner(game){
   validateGame(game);
-  const player1Score = game.players[0].score;
-  const player2Score = game.players[1].score;
-  let winner = -1;
+  let winner = null;
 
-  if(player1Score + player2Score === game.target){
+  if(game.iteration >= game.target){
+    const player1Score = game.players[0].score;
+    const player2Score = game.players[1].score;
+    if(player1Score === player2Score) return winner;
     winner = (player1Score > player2Score) ? game.players[0].id : game.players[1].id;
   }
 

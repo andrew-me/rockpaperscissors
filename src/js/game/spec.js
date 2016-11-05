@@ -93,11 +93,23 @@ describe('game', () => {
     gameData = addPlayer(gameData, 0);
     gameData = addPlayer(gameData, 1);
     gameData.iteration = gameData.target;
-    gameData.players[0].score = 4;
+    gameData.players[0].score = 3;
     gameData.players[1].score = 1;
 
     const winner = checkIfWinner(gameData);
     expect(winner).to.equal(0);
+	});
+
+  it('should not indicate a winner if scores are equal', () => {
+    let gameData = makeDummyGameData();
+    gameData = addPlayer(gameData, 0);
+    gameData = addPlayer(gameData, 1);
+    gameData.iteration = gameData.target;
+    gameData.players[0].score = 1;
+    gameData.players[1].score = 1;
+
+    const winner = checkIfWinner(gameData);
+    expect(winner).to.equal(null);
 	});
 
   it('should get a players score', () => {
