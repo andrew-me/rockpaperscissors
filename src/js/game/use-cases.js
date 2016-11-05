@@ -55,18 +55,18 @@ function addWeapons(game, weapons) {
 
 function play(game, player1Weapon, player2Weapon) {
   validateGame(game);
-  const winner = game.weapons.declareWinner(game.weapons.items, player1Weapon, player2Weapon);
+  const winningWeapon = game.weapons.declareWinner(game.weapons.items, player1Weapon, player2Weapon);
   game.iteration++;
-  game.message = winner.message;
+  game.message = winningWeapon.message;
   game.players[0].currentWeapon = player1Weapon;
   game.players[1].currentWeapon = player2Weapon;
 
-  if(winner.id !== -1){
+  if(winningWeapon.id !== -1){
     game.players.forEach(
-      function(item){
-        if(item.id === winner.id){
-          item.score++;
-          game.message = winner.message;
+      function(player){
+        if(player.currentWeapon === winningWeapon.id){
+          player.score++;
+          game.message = winningWeapon.message;
         }
       }
     );

@@ -10,7 +10,7 @@ const humanUser = getHumanUser(userData.users);
 const botUser = getBotUser(userData.users);
 const weapons = getWeapons(weaponsData.weapons);
 
-let game = init(gameData, botUser.id, humanUser.id, weapons);
+let game = init(gameData, humanUser.id, botUser.id, weapons);
 
 const weaponAction = function(weaponId){
   return function(){
