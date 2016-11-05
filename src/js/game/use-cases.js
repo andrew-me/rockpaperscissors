@@ -19,6 +19,7 @@ function iterate(game) {
 function reset(game) {
   validateGame(game);
   game.target = 5;
+  game.message = '';
   game.iteration = 0;
   game.players[0].score = 0;
   game.players[1].score = 0;
@@ -28,7 +29,7 @@ function reset(game) {
 function getState(game) {
   validateGame(game);
   if(game.iteration === 0) return 'start';
-  if(checkIfWinner(game)) return 'end';
+  if(checkIfWinner(game) !== null) return 'end';
   return 'playing';
 }
 
