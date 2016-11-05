@@ -19,7 +19,7 @@ function iterate(game) {
 function reset(game) {
   validateGame(game);
   game.target = 5;
-  game.message = '';
+  game.message = null;
   game.iteration = 0;
   game.players[0].score = 0;
   game.players[1].score = 0;
