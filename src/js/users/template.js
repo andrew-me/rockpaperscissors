@@ -3,9 +3,13 @@ export {
 };
 
 function renderUser(user, score) {
-  return (`<div class="user">
+  const div = document.createElement('div');
+  div.className = 'user';
+  div.innerHTML =  (`
     <h2 class="user__name">${user.name}</h2>
     <p class="user__type">${user.type}</p>
     <p class="user__score">${score}</p>
-  </div>`);
+  `);
+
+  return div;
 }

@@ -57,14 +57,18 @@ function play(game, player1Weapon, player2Weapon) {
   validateGame(game);
   const winner = game.weapons.declareWinner(game.weapons.items, player1Weapon, player2Weapon);
   game.iteration++;
-  game.players.forEach(
-    function(item){
-      if(item.id === winner.id){
-        item.score++;
-        game.message = winner.message;
+  game.message = winner.message;
+
+  if(winner.id !== -1){
+    game.players.forEach(
+      function(item){
+        if(item.id === winner.id){
+          item.score++;
+          game.message = winner.message;
+        }
       }
-    }
-  );
+    );
+  }
   return game;
 }
 
