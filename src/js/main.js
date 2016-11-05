@@ -43,4 +43,5 @@ const render = function(){
   app.appendChild(weaponsHTML);
 }
 
+game.message = `Best of ${game.target} games. Good luck!`;
 render();
