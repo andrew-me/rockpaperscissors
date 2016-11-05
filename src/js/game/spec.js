@@ -38,7 +38,20 @@ describe('game', () => {
     const statePlaying = getState(gameDataPlaying);
     expect(statePlaying).to.equal('playing');
 
+    let gameDataPlaying2 = makeDummyGameData();
+    gameDataPlaying2 = addPlayer(gameDataPlaying2, 0);
+    gameDataPlaying2 = addPlayer(gameDataPlaying2, 1);
+    gameDataPlaying2.players[0].score = 3;
+    gameDataPlaying2.players[1].score = 3;
+    gameDataPlaying2.iteration = gameDataPlaying2.target + 1;
+    const statePlaying2 = getState(gameDataPlaying2);
+    expect(statePlaying2).to.equal('playing');
+
     let gameDataEnd = makeDummyGameData();
+    gameDataEnd = addPlayer(gameDataEnd, 0);
+    gameDataEnd = addPlayer(gameDataEnd, 1);
+    gameDataEnd.players[0].score = 2;
+    gameDataEnd.players[1].score = 3;
     gameDataEnd.iteration = gameDataEnd.target;
     const stateEnd = getState(gameDataEnd);
     expect(stateEnd).to.equal('end');

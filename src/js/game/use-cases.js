@@ -28,7 +28,7 @@ function reset(game) {
 function getState(game) {
   validateGame(game);
   if(game.iteration === 0) return 'start';
-  if(game.iteration === game.target) return 'end';
+  if(checkIfWinner(game)) return 'end';
   return 'playing';
 }
 
