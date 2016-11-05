@@ -4,23 +4,30 @@ export {
 };
 
 function renderWeapon(weapon, handler) {
+  if(!weapon) return;
+
   const h2 = document.createElement('h2');
-  h2.onclick = handler(weapon.id);
+  if(handler){
+    h2.onclick = handler(weapon.id);
+  }
+
   h2.className = 'weapon__name';
   h2.innerHTML = weapon.name;
 
-  const li = document.createElement('li');
-  li.className = 'weapon';
-  li.appendChild(h2);
+  const div = document.createElement('div');
+  div.className = 'weapon';
+  div.appendChild(h2);
 
-  return li;
+  return div;
 }
 
 function renderWeapons(weapons, handler) {
   const ul = document.createElement('ul');
   ul.className = 'weapons';
   weapons.forEach((weapon) => {
-    let li = renderWeapon(weapon, handler);
+    let li = document.createElement('li');
+    let div = renderWeapon(weapon, handler);
+    li.appendChild(div);
     ul.appendChild(li);
   });
 

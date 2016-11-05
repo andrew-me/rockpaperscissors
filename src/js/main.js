@@ -1,7 +1,7 @@
 require('../css/main.scss');
 
 import { data as userData, getHumanUser, getBotUser, renderUser } from './users';
-import { data as weaponsData, getWeapons, renderWeapons } from './weapons';
+import { data as weaponsData, getWeapons, filterWeaponsById, renderWeapons, renderWeapon } from './weapons';
 import { data as gameData, init, getPlayerScore, play } from './game';
 
 const app = document.getElementById('app');
@@ -23,10 +23,17 @@ const weaponAction = function(weaponId){
 const render = function(){
   const humanUserHTML = renderUser(humanUser, getPlayerScore(game, humanUser.id));
   const botUserHTML = renderUser(botUser, getPlayerScore(game, botUser.id));
+  const botWeaponHTML = renderWeapon(filterWeaponsById(weapons.items, game.players[1].currentWeapon), null);
   const weaponsHTML = renderWeapons(weapons.items, weaponAction);
 
-  app.innerHTML = `<div class="message">${game.message}</div>`;
+  if(game.message){
+    app.innerHTML = `<div class="message">${game.message}</div>`;
+  }
+
   app.appendChild(botUserHTML);
+  if(botWeaponHTML){
+    app.appendChild(botWeaponHTML);
+  }
   app.appendChild(humanUserHTML);
   app.appendChild(weaponsHTML);
 }
