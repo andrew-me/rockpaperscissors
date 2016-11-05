@@ -17,7 +17,7 @@ const weaponAction = function(weaponId){
     const randomWeapon = weapons.getRandomWeapon(weaponsData.weapons);
     game = play(game, weaponId, randomWeapon.id);
     const winnerId = checkIfWinner(game);
-    if(winnerId){
+    if(winnerId !== null){
       const winner = filterUsersById(userData.users, winnerId);
       game.message += ` Winner! ${winner.name}`;
     }
