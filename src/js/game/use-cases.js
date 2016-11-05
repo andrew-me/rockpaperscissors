@@ -42,7 +42,7 @@ function init(game, userId1, userId2, weapons) {
 
 function addPlayer(game, id) {
   validateGame(game);
-  game.players.push({id: id, score: 0});
+  game.players.push({id: id, score: 0, currentWeapon: null});
   return game;
 }
 
@@ -58,6 +58,8 @@ function play(game, player1Weapon, player2Weapon) {
   const winner = game.weapons.declareWinner(game.weapons.items, player1Weapon, player2Weapon);
   game.iteration++;
   game.message = winner.message;
+  game.players[0].currentWeapon = player1Weapon;
+  game.players[1].currentWeapon = player2Weapon;
 
   if(winner.id !== -1){
     game.players.forEach(

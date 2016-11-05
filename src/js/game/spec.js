@@ -74,7 +74,9 @@ describe('game', () => {
     expect(playedGameData.iteration).to.equal(1);
     expect(playedGameData.message).to.equal(weapons.items[0].beats[0].message);
     expect(playedGameData.players[0].score).to.equal(1);
+    expect(playedGameData.players[0].currentWeapon).to.equal(0);
     expect(playedGameData.players[1].score).to.equal(0);
+    expect(playedGameData.players[1].currentWeapon).to.equal(2);
 	});
 
   it('should indicate winning player', () => {
