@@ -3,7 +3,8 @@ export {
   getBotUser,
   filterUsersByType,
   filterUsersById,
-  filterOutUsersById
+  filterOutUsersById,
+  getAltUserType
 };
 
 function getHumanUser(users) {
@@ -42,4 +43,9 @@ function validateUsers(users) {
       !(typeof users[0].id === 'number'))) {
     throw new Error('invalid users array');
   }
+}
+
+function getAltUserType(type) {
+  if(type === 'bot') return 'human';
+  if(type === 'human') return 'bot';
 }
