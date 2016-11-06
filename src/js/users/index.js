@@ -1,5 +1,5 @@
 import { data } from './data';
-import { getHumanUser, getBotUser, filterUsersById } from './use-cases';
+import { getHumanUser, getBotUser, filterUsersById, filterOutUsersById } from './use-cases';
 import { renderUser } from './template';
 
 export {
@@ -7,5 +7,6 @@ export {
   getHumanUser,
   getBotUser,
   filterUsersById,
+  filterOutUsersById,
   renderUser
 };

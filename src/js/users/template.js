@@ -6,9 +6,11 @@ function renderUser(user, score) {
   const div = document.createElement('div');
   div.className = 'user';
   div.innerHTML =  (`
-    <h2 class="user__name">${user.name}</h2>
-    <p class="user__type">${user.type}</p>
-    <p class="user__score">${score}</p>
+    <h2 class="user__name">${user.name} <span class="user__type">(${user.type})</span></h2>
+    <details>
+      <summary>Switch User</summary>
+    </details>
+    <p class="user__score">score: ${score}</p>
   `);
 
   return div;

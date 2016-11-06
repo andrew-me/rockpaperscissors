@@ -1,7 +1,9 @@
 export {
   getHumanUser,
   getBotUser,
-  filterUsersById
+  filterUsersByType,
+  filterUsersById,
+  filterOutUsersById
 };
 
 function getHumanUser(users) {
@@ -16,10 +18,22 @@ function getBotUser(users) {
   return botUsers[0];
 }
 
+function filterUsersByType(users, type) {
+  validateUsers(users);
+  return users.filter(user => user.type === type);
+}
+
 function filterUsersById(users, id) {
   validateUsers(users);
   const filteredUsers = users.filter(user => user.id === id);
   return filteredUsers[0];
+}
+
+function filterOutUsersById(users, userIds) {
+  validateUsers(users);
+  return users.filter(
+    user => userIds.findIndex((id) => id === user.id) === -1
+  );
 }
 
 function validateUsers(users) {
