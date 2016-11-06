@@ -2,7 +2,7 @@ export {
   renderUser
 };
 
-function renderUser(user, score) {
+function renderUser(user, score, altUsers) {
   const div = document.createElement('div');
   div.className = 'user';
   div.innerHTML =  (`

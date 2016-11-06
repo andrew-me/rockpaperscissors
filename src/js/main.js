@@ -1,6 +1,6 @@
 require('../css/main.scss');
 
-import { data as userData, getHumanUser, getBotUser, renderUser, filterUsersById } from './users';
+import { data as userData, getHumanUser, getBotUser, filterUsersByType, renderUser, filterUsersById, filterOutUsersById } from './users';
 import { data as weaponsData, getWeapons, filterWeaponsById, renderWeapons, renderWeapon } from './weapons';
 import { data as gameData, reset, init, getPlayerScore, play, checkIfWinner } from './game';
 
@@ -31,7 +31,7 @@ const doReset = function() {
 }
 
 const render = function(){
-  const humanUserHTML = renderUser(humanUser, getPlayerScore(game, humanUser.id));
+  const humanUserHTML = renderUser(humanUser, getPlayerScore(game, humanUser.id), filterUsersByType(filterOutUsersById(userData.users, [humanUser.id, botUser.id]), 'bot'));
   const botUserHTML = renderUser(botUser, getPlayerScore(game, botUser.id));
   const botWeaponHTML = renderWeapon(filterWeaponsById(weapons.items, game.players[1].currentWeapon), null);
   const weaponsHTML = renderWeapons(weapons.items, weaponAction);

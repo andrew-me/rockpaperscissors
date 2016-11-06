@@ -7,5 +7,13 @@ export const data = {
     id: 1,
     name: 'Robert',
     type: 'bot'
+  }, {
+    id: 2,
+    name: 'Me',
+    type: 'human'
+  }, {
+    id: 3,
+    name: 'Botham',
+    type: 'bot'
   }]
 };
