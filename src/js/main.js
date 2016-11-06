@@ -6,11 +6,11 @@ import { data as gameData, reset, init, getPlayerScore, play, checkIfWinner } fr
 
 const app = document.getElementById('app');
 
-const humanUser = getHumanUser(userData.users);
-const botUser = getBotUser(userData.users);
+const user1 = getHumanUser(userData.users);
+const user2 = getBotUser(userData.users);
 const weapons = getWeapons(weaponsData.weapons);
 
-let game = init(gameData, humanUser.id, botUser.id, weapons);
+let game = init(gameData, user1.id, user2.id, weapons);
 
 const weaponAction = function(weaponId){
   return function(){
@@ -31,9 +31,9 @@ const doReset = function() {
 }
 
 const render = function(){
-  const humanUserHTML = renderUser(humanUser, getPlayerScore(game, humanUser.id), filterUsersByType(filterOutUsersById(userData.users, [humanUser.id, botUser.id]), 'bot'));
-  const botUserHTML = renderUser(botUser, getPlayerScore(game, botUser.id));
-  const botWeaponHTML = renderWeapon(filterWeaponsById(weapons.items, game.players[1].currentWeapon), null);
+  const user1HTML = renderUser(user1, getPlayerScore(game, user1.id), filterUsersByType(filterOutUsersById(userData.users, [user1.id, user2.id]), 'user1'));
+  const user2HTML = renderUser(user2, getPlayerScore(game, user2.id));
+  const user1WeaponHTML = renderWeapon(filterWeaponsById(weapons.items, game.players[1].currentWeapon), null);
   const weaponsHTML = renderWeapons(weapons.items, weaponAction);
 
   app.innerHTML = '';
@@ -42,11 +42,11 @@ const render = function(){
     app.innerHTML = `<div class="message">${game.message}</div>`;
   }
 
-  app.appendChild(botUserHTML);
-  if(botWeaponHTML){
-    app.appendChild(botWeaponHTML);
+  app.appendChild(user2HTML);
+  if(user1WeaponHTML){
+    app.appendChild(user1WeaponHTML);
   }
-  app.appendChild(humanUserHTML);
+  app.appendChild(user1HTML);
   app.appendChild(weaponsHTML);
 
 
