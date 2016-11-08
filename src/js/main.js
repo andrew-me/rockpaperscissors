@@ -61,7 +61,7 @@ const render = function(){
   const user1HTML = renderUser(
     user1,
     getPlayerScore(game, user1.id),
-    !!(getState(game) === 'start'),
+    getState(game) === 'start',
     filterOutUsersById(userData.users, [user1.id, user2.id]),
     switchPlayerAction(game)
   );
@@ -88,10 +88,12 @@ const render = function(){
     if(user2WeaponHTML){
       app.appendChild(user2WeaponHTML);
     }
-    const autoButton = document.createElement('button');
-    autoButton.innerHTML = 'Go!';
-    autoButton.onclick = doAutoPlay;
-    app.appendChild(autoButton);
+    if(getState(game) === 'start'){
+      const autoButton = document.createElement('button');
+      autoButton.innerHTML = 'Go!';
+      autoButton.onclick = doAutoPlay;
+      app.appendChild(autoButton);
+    }
   }
 
   const div = document.createElement('div');
