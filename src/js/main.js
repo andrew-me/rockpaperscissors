@@ -1,17 +1,16 @@
 require('../css/main.scss');
 
-import { data as userData, getHumanUser, getBotUser, filterUsersByType, getAltUserType, renderUser, filterUsersById, filterOutUsersById } from './users';
+import { data as userData, getHumanUser, getBotUser, renderUser, filterUsersById, filterOutUsersById } from './users';
 import { data as weaponsData, getWeapons, filterWeaponsById, renderWeapons, renderWeapon } from './weapons';
-import { data as gameData, reset, init, getPlayerScore, play, checkIfWinner } from './game';
+import { data as gameData, reset, init, switchPlayer, getPlayerScore, play, checkIfWinner } from './game';
 
 const app = document.getElementById('app');
 
-const user1 = getHumanUser(userData.users);
-const user2 = getBotUser(userData.users);
+let user1 = getHumanUser(userData.users);
+let user2 = getBotUser(userData.users);
 const weapons = getWeapons(weaponsData.weapons);
 
 let game = init(gameData, user1.id, user2.id, weapons);
-
 const weaponAction = function(weaponId){
   return function(){
     const randomWeapon = weapons.getRandomWeapon(weaponsData.weapons);
@@ -25,6 +24,22 @@ const weaponAction = function(weaponId){
   }
 }
 
+const switchPlayerAction = function(game){
+  return function(oldUserId, newUserId) {
+    return function(){
+      game = switchPlayer(game, oldUserId, newUserId);
+      const newUser = filterUsersById(userData.users, newUserId);
+      if(user1.id === oldUserId) {
+        user1 = newUser;
+      }
+      else {
+        user2 = newUser;
+      }
+      render();
+    }
+  }
+}
+
 const doReset = function() {
   reset(game);
   render();
@@ -34,7 +49,8 @@ const render = function(){
   const user1HTML = renderUser(
     user1,
     getPlayerScore(game, user1.id),
-    filterUsersByType(filterOutUsersById(userData.users, [user1.id, user2.id]), getAltUserType(user1.type))
+    filterOutUsersById(userData.users, [user1.id, user2.id]),
+    switchPlayerAction(game)
   );
   const user2HTML = renderUser(user2, getPlayerScore(game, user2.id));
   const user1WeaponHTML = renderWeapon(filterWeaponsById(weapons.items, game.players[1].currentWeapon), null);

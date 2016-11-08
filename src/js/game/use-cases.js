@@ -4,6 +4,7 @@ export {
   getState,
   init,
   addPlayer,
+  switchPlayer,
   addWeapons,
   play,
   checkIfWinner,
@@ -44,6 +45,16 @@ function init(game, userId1, userId2, weapons) {
 function addPlayer(game, id) {
   validateGame(game);
   game.players.push({id: id, score: 0, currentWeapon: null});
+  return game;
+}
+
+function switchPlayer(game, oldUserId, newUserId) {
+  validateGame(game);
+  game.players.forEach((player) => {
+    if(player.id === oldUserId) {
+      player.id = newUserId;
+    }
+  });
   return game;
 }
 
