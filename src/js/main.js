@@ -68,8 +68,15 @@ const render = function(){
     app.appendChild(user1WeaponHTML);
   }
   app.appendChild(user1HTML);
-  app.appendChild(weaponsHTML);
-
+  if(user1.type === 'human'){
+    app.appendChild(weaponsHTML);
+  }
+  else {
+    const user2WeaponHTML = renderWeapon(filterWeaponsById(weapons.items, game.players[0].currentWeapon), null);
+    if(user2WeaponHTML){
+      app.appendChild(user2WeaponHTML);
+    }
+  }
 
   const div = document.createElement('div');
   div.className = 'reset';
