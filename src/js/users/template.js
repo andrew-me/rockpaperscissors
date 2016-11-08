@@ -2,9 +2,9 @@ export {
   renderUser
 };
 
-function renderUser(user, score, altUsers, altHandler) {
+function renderUser(user, score, showAltUsers = false, altUsers, altHandler) {
   let altUsersHTML = null;
-  if(altUsers){
+  if(showAltUsers && altUsers){
 
     altUsersHTML = document.createElement('div');
     altUsersHTML.className = 'alt-users';

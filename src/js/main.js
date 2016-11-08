@@ -2,7 +2,7 @@ require('../css/main.scss');
 
 import { data as userData, getHumanUser, getBotUser, renderUser, filterUsersById, filterOutUsersById } from './users';
 import { data as weaponsData, getWeapons, filterWeaponsById, renderWeapons, renderWeapon } from './weapons';
-import { data as gameData, reset, init, switchPlayer, getPlayerScore, play, checkIfWinner } from './game';
+import { data as gameData, reset, getState, init, switchPlayer, getPlayerScore, play, checkIfWinner } from './game';
 
 const app = document.getElementById('app');
 
@@ -49,6 +49,7 @@ const render = function(){
   const user1HTML = renderUser(
     user1,
     getPlayerScore(game, user1.id),
+    !!(getState(game) === 'start'),
     filterOutUsersById(userData.users, [user1.id, user2.id]),
     switchPlayerAction(game)
   );
