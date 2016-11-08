@@ -45,6 +45,10 @@ const doReset = function() {
   render();
 }
 
+const doAutoPlay = function() {
+
+}
+
 const render = function(){
   const user1HTML = renderUser(
     user1,
@@ -76,6 +80,10 @@ const render = function(){
     if(user2WeaponHTML){
       app.appendChild(user2WeaponHTML);
     }
+    const autoButton = document.createElement('button');
+    autoButton.innerHTML = 'Go!';
+    autoButton.onclick = doAutoPlay;
+    app.appendChild(autoButton);
   }
 
   const div = document.createElement('div');
