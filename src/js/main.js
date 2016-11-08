@@ -14,11 +14,7 @@ let game = init(gameData, user1.id, user2.id, weapons);
 
 const takeTurn = function(weapon1Id, weapon2Id) {
   game = play(game, weapon1Id, weapon2Id);
-  const winnerId = checkIfWinner(game);
-  if(winnerId !== null){
-    const winner = filterUsersById(userData.users, winnerId);
-    game.message = `Winner! ${winner.name}`;
-  }
+  showGameWinnerMessage(game);
   render();
 }
 
@@ -26,6 +22,14 @@ const takeTurnWithRandomWeapons = function() {
   const randomWeapon = weapons.getRandomWeapon(weaponsData.weapons);
   const randomWeapon2 = weapons.getRandomWeapon(weaponsData.weapons);
   takeTurn(randomWeapon.id, randomWeapon2.id);
+}
+
+const showGameWinnerMessage = function(game) {
+  const winnerId = checkIfWinner(game);
+  if(winnerId !== null){
+    const winner = filterUsersById(userData.users, winnerId);
+    game.message = `Winner! ${winner.name}`;
+  }
 }
 
 const weaponAction = function(weaponId){
