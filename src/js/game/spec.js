@@ -22,7 +22,9 @@ describe('game', () => {
     gameData.target = origGameData.target + 1;
     gameData.iteration = origGameData.target - 2;
     gameData.players[0].score = 2;
+    gameData.players[0].currentWeapon = null;
     gameData.players[1].score = 0;
+    gameData.players[1].currentWeapon = null;
 
     const resetGameData = reset(gameData);
     expect(resetGameData).to.deep.equal(origGameData);

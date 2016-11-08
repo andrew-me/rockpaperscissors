@@ -23,7 +23,9 @@ function reset(game) {
   game.message = null;
   game.iteration = 0;
   game.players[0].score = 0;
+  game.players[0].currentWeapon = null;
   game.players[1].score = 0;
+  game.players[1].currentWeapon = null;
   return game;
 }
 
