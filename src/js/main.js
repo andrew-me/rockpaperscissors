@@ -11,16 +11,27 @@ let user2 = getBotUser(userData.users);
 const weapons = getWeapons(weaponsData.weapons);
 
 let game = init(gameData, user1.id, user2.id, weapons);
+
+const takeTurn = function(weapon1Id, weapon2Id) {
+  game = play(game, weapon1Id, weapon2Id);
+  const winnerId = checkIfWinner(game);
+  if(winnerId !== null){
+    const winner = filterUsersById(userData.users, winnerId);
+    game.message = `Winner! ${winner.name}`;
+  }
+  render();
+}
+
+const takeTurnWithRandomWeapons = function() {
+  const randomWeapon = weapons.getRandomWeapon(weaponsData.weapons);
+  const randomWeapon2 = weapons.getRandomWeapon(weaponsData.weapons);
+  takeTurn(randomWeapon.id, randomWeapon2.id);
+}
+
 const weaponAction = function(weaponId){
   return function(){
     const randomWeapon = weapons.getRandomWeapon(weaponsData.weapons);
-    game = play(game, weaponId, randomWeapon.id);
-    const winnerId = checkIfWinner(game);
-    if(winnerId !== null){
-      const winner = filterUsersById(userData.users, winnerId);
-      game.message = `Winner! ${winner.name}`;
-    }
-    render();
+    takeTurn(weaponId, randomWeapon.id);
   }
 }
 
@@ -45,16 +56,13 @@ const doReset = function() {
   render();
 }
 
-const doAutoPlay = function() {
-  const randomWeapon = weapons.getRandomWeapon(weaponsData.weapons);
-  const randomWeapon2 = weapons.getRandomWeapon(weaponsData.weapons);
-  game = play(game, randomWeapon.id, randomWeapon2.id);
-  const winnerId = checkIfWinner(game);
-  if(winnerId !== null){
-    const winner = filterUsersById(userData.users, winnerId);
-    game.message = `Winner! ${winner.name}`;
+const autoPlay = function() {
+  takeTurnWithRandomWeapons();
+  if(getState(game) !== 'end'){
+    window.setTimeout(function(){
+      autoPlay();
+    }, 1000);
   }
-  render();
 }
 
 const render = function(){
@@ -91,7 +99,7 @@ const render = function(){
     if(getState(game) === 'start'){
       const autoButton = document.createElement('button');
       autoButton.innerHTML = 'Go!';
-      autoButton.onclick = doAutoPlay;
+      autoButton.onclick = autoPlay;
       app.appendChild(autoButton);
     }
   }
