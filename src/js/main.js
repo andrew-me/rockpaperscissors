@@ -46,7 +46,15 @@ const doReset = function() {
 }
 
 const doAutoPlay = function() {
-
+  const randomWeapon = weapons.getRandomWeapon(weaponsData.weapons);
+  const randomWeapon2 = weapons.getRandomWeapon(weaponsData.weapons);
+  game = play(game, randomWeapon.id, randomWeapon2.id);
+  const winnerId = checkIfWinner(game);
+  if(winnerId !== null){
+    const winner = filterUsersById(userData.users, winnerId);
+    game.message = `Winner! ${winner.name}`;
+  }
+  render();
 }
 
 const render = function(){
