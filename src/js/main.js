@@ -31,7 +31,11 @@ const doReset = function() {
 }
 
 const render = function(){
-  const user1HTML = renderUser(user1, getPlayerScore(game, user1.id), filterUsersByType(filterOutUsersById(userData.users, [user1.id, user2.id]), getAltUserType(user1.type)));
+  const user1HTML = renderUser(
+    user1,
+    getPlayerScore(game, user1.id),
+    filterUsersByType(filterOutUsersById(userData.users, [user1.id, user2.id]), getAltUserType(user1.type))
+  );
   const user2HTML = renderUser(user2, getPlayerScore(game, user2.id));
   const user1WeaponHTML = renderWeapon(filterWeaponsById(weapons.items, game.players[1].currentWeapon), null);
   const weaponsHTML = renderWeapons(weapons.items, weaponAction);
