@@ -1,7 +1,16 @@
 body {
-	background-color: green;
+  background: #cccccc;
+  font-family: sans-serif;
+  font-size: 14px;
+}
 
-	h1 {
-		color: white;
-	}
+.wrapper {
+  background: #ffffff;
+  padding: 30px;
+  color: #666666;
+
+  @media screen and (min-width: 1440px) {
+    width: 1440px;
+    margin: 0 auto;
+  }
 }

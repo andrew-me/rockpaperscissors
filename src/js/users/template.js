@@ -1,3 +1,5 @@
+require('./styles.scss');
+
 export {
   renderUser
 };
@@ -37,7 +39,7 @@ function renderUser(user, score, showAltUsers = false, altUsers, altHandler) {
 
   const h2 = document.createElement('h2');
   h2.className = 'user__name';
-  h2.innerHTML = `${user.name} <span class="user__type">(${user.type})</span>`;
+  h2.innerHTML = `${user.name} <div class="user__type user__type--${user.type}"><span class="hide">${user.type}</span></div>`;
 
   const p = document.createElement('p');
   p.className = 'user__score';
