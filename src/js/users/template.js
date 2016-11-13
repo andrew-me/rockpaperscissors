@@ -15,6 +15,7 @@ function renderUser(user, score, showAltUsers = false, altUsers, altHandler) {
     details.className = 'alt-users__details';
 
     const summary = document.createElement('summary');
+    summary.className = 'alt-users__summary';
     summary.innerHTML = 'SwitchUser';
 
     const ul = document.createElement('ul');
@@ -22,6 +23,7 @@ function renderUser(user, score, showAltUsers = false, altUsers, altHandler) {
 
     altUsers.forEach((altUser) => {
       let li = document.createElement('li');
+      li.className = 'alt-users__list-item'
       li.innerHTML = `${altUser.name}`;
       if(altHandler){
         li.onclick = altHandler(user.id, altUser.id);
@@ -34,22 +36,27 @@ function renderUser(user, score, showAltUsers = false, altUsers, altHandler) {
     details.appendChild(ul);
   }
 
-  const div = document.createElement('div');
-  div.className = 'user';
+  const userDiv = document.createElement('div');
+  userDiv.className = 'user';
+
+  const userBarDiv = document.createElement('div');
+  userBarDiv.className = 'user__bar';
 
   const h2 = document.createElement('h2');
   h2.className = 'user__name';
-  h2.innerHTML = `${user.name} <div class="user__type user__type--${user.type}"><span class="hide">${user.type}</span></div>`;
+  h2.innerHTML = `<span>${user.name}</span> <div class="user__type user__type--${user.type}"><span class="hide">${user.type}</span></div>`;
 
-  const p = document.createElement('p');
-  p.className = 'user__score';
-  p.innerHTML = `score: ${score}`;
+  const scoreDiv = document.createElement('p');
+  scoreDiv.className = 'user__score';
+  scoreDiv.innerHTML = `<h3 class="hide">score:</h3> ${score}`;
 
-  div.appendChild(h2);
+  userBarDiv.appendChild(h2);
+  userBarDiv.appendChild(scoreDiv);
+
+  userDiv.appendChild(userBarDiv);
   if(altUsersHTML){
-    div.appendChild(altUsersHTML);
+    userDiv.appendChild(altUsersHTML);
   }
-  div.appendChild(p);
 
-  return div;
+  return userDiv;
 }
