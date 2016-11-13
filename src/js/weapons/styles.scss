@@ -22,7 +22,8 @@
 .weapon {
   display: flex;
   justify-content: center;
-  min-height: 90px;
+  min-height: 65px;
+  max-width: 500px;
 
   @media screen and (min-width: 350px) {
     min-height: 120px;
@@ -31,8 +32,8 @@
 
 .weapon__name {
 
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
