@@ -2,7 +2,7 @@ require('../css/main.scss');
 
 import { data as userData, getHumanUser, getBotUser, renderUser, filterUsersById, filterOutUsersById } from './users';
 import { data as weaponsData, getWeapons, filterWeaponsById, renderWeapons, renderWeapon } from './weapons';
-import { data as gameData, reset, getState, init, switchPlayer, getPlayerScore, play, checkIfWinner } from './game';
+import { data as gameData, reset, getState, init, switchPlayer, getPlayerScore, play, checkIfWinner, renderAutoGoButton, renderResetButton } from './game';
 
 const app = document.getElementById('app');
 
@@ -103,11 +103,7 @@ const render = function(){
     app.appendChild(weaponsHTML);
 
     if(getState(game) !== 'start'){
-      const div = document.createElement('button');
-      div.className = 'btn btn--large reset';
-      div.innerHTML = 'Reset';
-      div.onclick = doReset;
-      app.appendChild(div);
+      app.appendChild(renderResetButton(doReset));
     }
   }
   else {
@@ -116,18 +112,10 @@ const render = function(){
       app.appendChild(user2WeaponHTML);
     }
     if(getState(game) === 'start'){
-      const autoButton = document.createElement('button');
-      autoButton.className = 'btn btn--large';
-      autoButton.innerHTML = 'Go!';
-      autoButton.onclick = autoPlay;
-      app.appendChild(autoButton);
+      app.appendChild(renderAutoGoButton(autoPlay));
     }
     if(getState(game) === 'end'){
-      const div = document.createElement('button');
-      div.className = 'btn btn--large reset';
-      div.innerHTML = 'Reset';
-      div.onclick = doReset;
-      app.appendChild(div);
+      app.appendChild(renderResetButton(doReset));
     }
   }
 }
