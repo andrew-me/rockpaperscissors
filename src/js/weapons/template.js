@@ -9,23 +9,27 @@ function renderWeapon(weapon, handler) {
   if(!weapon) return;
 
   let classes = 'weapon__name ';
+  let wrap;
 
-  const h2 = document.createElement('h2');
   if(handler){
-    h2.onclick = handler(weapon.id);
-    classes += 'weapon__name--choice ';
+    wrap = document.createElement('button');
+    wrap.onclick = handler(weapon.id);
+    classes += 'btn weapon__name--choice ';
+  }
+  else {
+    wrap = document.createElement('div');
   }
 
-  h2.className = classes + 'weapon__name--' + weapon.name.toLowerCase();
+  wrap.className = classes + 'weapon__name--' + weapon.name.toLowerCase();
 
   const span = document.createElement('span');
   span.className = 'hide';
   span.innerHTML = weapon.name;
-  h2.appendChild(span);
+  wrap.appendChild(span);
 
   const div = document.createElement('div');
   div.className = 'weapon';
-  div.appendChild(h2);
+  div.appendChild(wrap);
 
   return div;
 }

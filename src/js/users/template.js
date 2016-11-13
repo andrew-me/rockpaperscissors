@@ -22,12 +22,19 @@ function renderUser(user, score, showAltUsers = false, altUsers, altHandler) {
     ul.className = 'alt-users__list';
 
     altUsers.forEach((altUser) => {
-      let li = document.createElement('li');
+      const li = document.createElement('li');
+      let wrap;
       li.className = 'alt-users__list-item';
-      li.innerHTML = `${altUser.name}`;
       if(altHandler){
-        li.onclick = altHandler(user.id, altUser.id);
+        wrap = document.createElement('button');
+        wrap.className = 'btn';
+        wrap.onclick = altHandler(user.id, altUser.id);
       }
+      else {
+        wrap = document.createElement('span');
+      }
+      wrap.innerHTML = `${altUser.name}`;
+      li.appendChild(wrap);
       ul.appendChild(li);
     });
 

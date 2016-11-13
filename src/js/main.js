@@ -57,6 +57,7 @@ const switchPlayerAction = function(game){
 
 const doReset = function() {
   reset(game);
+  game.message = `Best of ${game.target} games. Good luck!`;
   render();
 }
 
@@ -97,8 +98,17 @@ const render = function(){
     app.appendChild(user1WeaponHTML);
   }
   app.appendChild(user1HTML);
+
   if(user1.type === 'human'){
     app.appendChild(weaponsHTML);
+
+    if(getState(game) !== 'start'){
+      const div = document.createElement('button');
+      div.className = 'btn btn--large reset';
+      div.innerHTML = 'Reset';
+      div.onclick = doReset;
+      app.appendChild(div);
+    }
   }
   else {
     const user2WeaponHTML = renderWeapon(filterWeaponsById(weapons.items, game.players[0].currentWeapon), null);
@@ -107,17 +117,19 @@ const render = function(){
     }
     if(getState(game) === 'start'){
       const autoButton = document.createElement('button');
+      autoButton.className = 'btn btn--large';
       autoButton.innerHTML = 'Go!';
       autoButton.onclick = autoPlay;
       app.appendChild(autoButton);
     }
+    if(getState(game) === 'end'){
+      const div = document.createElement('button');
+      div.className = 'btn btn--large reset';
+      div.innerHTML = 'Reset';
+      div.onclick = doReset;
+      app.appendChild(div);
+    }
   }
-
-  const div = document.createElement('div');
-  div.className = 'reset';
-  div.innerHTML = 'Reset';
-  div.onclick = doReset;
-  app.appendChild(div);
 }
 
 game.message = `Best of ${game.target} games. Good luck!`;
