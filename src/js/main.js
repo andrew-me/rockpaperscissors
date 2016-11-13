@@ -103,9 +103,9 @@ const renderUserWithWeapons = function(userToRender, otherUser, allowUserChange 
   return div;
 }
 
-const renderButtons = function(user1, user2){
+const renderButtons = function(hasHuman){
   const div = document.createElement('div');
-  if(user1.type === 'human' || user2.type === 'human'){
+  if(hasHuman){
     if(getState(game) !== 'start'){
       div.appendChild(renderResetButton(doReset));
     }
@@ -128,7 +128,7 @@ const render = function(){
   app.appendChild(renderMessage(game.message));
   app.appendChild(renderUserWithWeapons(user2, user1, false));
   app.appendChild(renderUserWithWeapons(user1, user2, true));
-  app.appendChild(renderButtons(user1, user2));
+  app.appendChild(renderButtons(user1.type === 'human' || user2.type === 'human'));
 }
 
 game.message = `First to ${game.target} games. Good luck!`;
