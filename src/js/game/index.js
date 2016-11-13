@@ -1,6 +1,6 @@
 import { data } from './data';
 import { reset, getState, init, addPlayer, switchPlayer, addWeapons, play, checkIfWinner, getPlayerScore } from './use-cases';
-import { renderAutoGoButton, renderResetButton } from './template';
+import { renderAutoGoButton, renderResetButton, renderMessage } from './template';
 
 export {
   data,
@@ -14,5 +14,6 @@ export {
   checkIfWinner,
   getPlayerScore,
   renderAutoGoButton,
-  renderResetButton
+  renderResetButton,
+  renderMessage
 };

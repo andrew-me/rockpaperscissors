@@ -2,7 +2,7 @@ require('../css/main.scss');
 
 import { data as userData, getHumanUser, getBotUser, renderUser, filterUsersById, filterOutUsersById } from './users';
 import { data as weaponsData, getWeapons, filterWeaponsById, renderWeapons, renderWeapon } from './weapons';
-import { data as gameData, reset, getState, init, switchPlayer, getPlayerScore, play, checkIfWinner, renderAutoGoButton, renderResetButton } from './game';
+import { data as gameData, reset, getState, init, switchPlayer, getPlayerScore, play, checkIfWinner, renderAutoGoButton, renderResetButton, renderMessage } from './game';
 
 const app = document.getElementById('app');
 
@@ -84,15 +84,7 @@ const render = function(){
 
   app.innerHTML = '';
 
-  const messageWrapper = document.createElement('div');
-  messageWrapper.className = 'message';
-
-  if(game.message){
-    messageWrapper.innerHTML = game.message;
-  }
-
-  app.appendChild(messageWrapper);
-
+  app.appendChild(renderMessage(game.message));
   app.appendChild(user2HTML);
   if(user1WeaponHTML){
     app.appendChild(user1WeaponHTML);

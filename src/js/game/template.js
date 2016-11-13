@@ -1,6 +1,7 @@
 export {
   renderAutoGoButton,
-  renderResetButton
+  renderResetButton,
+  renderMessage
 };
 
 function renderAutoGoButton(handler) {
@@ -17,6 +18,17 @@ function renderResetButton(handler) {
   div.className = 'btn btn--large reset';
   div.innerHTML = 'Reset';
   div.onclick = handler;
+
+  return div;
+}
+
+function renderMessage(message) {
+  const div = document.createElement('div');
+  div.className = 'message';
+
+  if(message){
+    div.innerHTML = message;
+  }
 
   return div;
 }
