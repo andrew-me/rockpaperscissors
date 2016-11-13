@@ -2,7 +2,7 @@ require('../css/main.scss');
 
 import { data as userData, getHumanUser, getBotUser, renderUser, filterUsersById, filterOutUsersById } from './users';
 import { data as weaponsData, getWeapons, filterWeaponsById, renderWeapons, renderWeapon } from './weapons';
-import { data as gameData, reset, getState, init, switchPlayer, getPlayerScore, play, checkIfWinner, renderAutoGoButton, renderResetButton, renderMessage } from './game';
+import { data as gameData, reset, getState, init, switchPlayer, getPlayerScore, getPlayerWeapon, play, checkIfWinner, renderAutoGoButton, renderResetButton, renderMessage } from './game';
 
 const app = document.getElementById('app');
 
@@ -70,46 +70,65 @@ const autoPlay = function() {
   }
 }
 
-const render = function(){
-  const user1HTML = renderUser(
-    user1,
-    getPlayerScore(game, user1.id),
-    getState(game) === 'start',
-    filterOutUsersById(userData.users, [user1.id, user2.id]),
-    switchPlayerAction(game)
-  );
-  const user2HTML = renderUser(user2, getPlayerScore(game, user2.id));
-  const user1WeaponHTML = renderWeapon(filterWeaponsById(weapons.items, game.players[1].currentWeapon), null);
-  const weaponsHTML = renderWeapons(weapons.items, weaponAction);
+const renderUserWithWeapons = function(userToRender, otherUser, allowUserChange = false){
+  let userHTML;
+  const score = getPlayerScore(game, userToRender.id);
 
+  if(allowUserChange){
+    userHTML = renderUser(
+      userToRender,
+      score,
+      getState(game) === 'start',
+      filterOutUsersById(userData.users, [userToRender.id, otherUser.id]),
+      switchPlayerAction(game)
+    );
+  }
+  else {
+    userHTML = renderUser(userToRender, score);
+  }
+
+  const div = document.createElement('div');
+  div.appendChild(userHTML);
+
+  if(userToRender.type === 'human'){
+    div.appendChild(renderWeapons(weapons.items, weaponAction));
+  }
+  else {
+    const userCurrentWeaponHTML = renderWeapon(filterWeaponsById(weapons.items, getPlayerWeapon(game, userToRender.id)), null);
+    if(userCurrentWeaponHTML){
+      div.appendChild(userCurrentWeaponHTML);
+    }
+  }
+
+  return div;
+}
+
+const renderButtons = function(user1, user2){
+  const div = document.createElement('div');
+  if(user1.type === 'human' || user2.type === 'human'){
+    if(getState(game) !== 'start'){
+      div.appendChild(renderResetButton(doReset));
+    }
+  }
+  else { // Both players are bots.
+    if(getState(game) === 'start'){
+      div.appendChild(renderAutoGoButton(autoPlay));
+    }
+    if(getState(game) === 'end'){
+      div.appendChild(renderResetButton(doReset));
+    }
+  }
+
+  return div;
+}
+
+const render = function(){
   app.innerHTML = '';
 
   app.appendChild(renderMessage(game.message));
-  app.appendChild(user2HTML);
-  if(user1WeaponHTML){
-    app.appendChild(user1WeaponHTML);
-  }
-  app.appendChild(user1HTML);
-
-  if(user1.type === 'human'){
-    app.appendChild(weaponsHTML);
-
-    if(getState(game) !== 'start'){
-      app.appendChild(renderResetButton(doReset));
-    }
-  }
-  else {
-    const user2WeaponHTML = renderWeapon(filterWeaponsById(weapons.items, game.players[0].currentWeapon), null);
-    if(user2WeaponHTML){
-      app.appendChild(user2WeaponHTML);
-    }
-    if(getState(game) === 'start'){
-      app.appendChild(renderAutoGoButton(autoPlay));
-    }
-    if(getState(game) === 'end'){
-      app.appendChild(renderResetButton(doReset));
-    }
-  }
+  app.appendChild(renderUserWithWeapons(user2, user1, false));
+  app.appendChild(renderUserWithWeapons(user1, user2, true));
+  app.appendChild(renderButtons(user1, user2));
 }
 
 game.message = `First to ${game.target} games. Good luck!`;

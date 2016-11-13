@@ -1,5 +1,5 @@
 import { data } from './data';
-import { reset, getState, init, addPlayer, switchPlayer, addWeapons, play, checkIfWinner, getPlayerScore } from './use-cases';
+import { reset, getState, init, addPlayer, switchPlayer, addWeapons, play, checkIfWinner, getPlayerScore, getPlayerWeapon } from './use-cases';
 import { renderAutoGoButton, renderResetButton, renderMessage } from './template';
 
 export {
@@ -13,6 +13,7 @@ export {
   play,
   checkIfWinner,
   getPlayerScore,
+  getPlayerWeapon,
   renderAutoGoButton,
   renderResetButton,
   renderMessage

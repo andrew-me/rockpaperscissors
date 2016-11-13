@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 /* global expect:false */
 
-import { iterate, reset, getState, addPlayer, switchPlayer, addWeapons, play, checkIfWinner, getPlayerScore } from './use-cases';
+import { iterate, reset, getState, addPlayer, switchPlayer, addWeapons, play, checkIfWinner, getPlayerScore, getPlayerWeapon } from './use-cases';
 
 describe('game', () => {
 
@@ -162,6 +162,17 @@ describe('game', () => {
 
     const score = getPlayerScore(gameData, 0);
     expect(score).to.equal(gameData.players[0].score);
+	});
+
+  it('should get a players weapon', () => {
+    let gameData = makeDummyGameData();
+    gameData = addPlayer(gameData, 0);
+    gameData = addPlayer(gameData, 1);
+    gameData.players[0].id = 0;
+    gameData.players[0].currentWeapon = 2;
+
+    const weapon = getPlayerWeapon(gameData, 0);
+    expect(weapon).to.equal(gameData.players[0].currentWeapon);
 	});
 
 });
