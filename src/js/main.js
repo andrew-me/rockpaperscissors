@@ -83,9 +83,14 @@ const render = function(){
 
   app.innerHTML = '';
 
+  const messageWrapper = document.createElement('div');
+  messageWrapper.className = 'message';
+
   if(game.message){
-    app.innerHTML = `<div class="message">${game.message}</div>`;
+    messageWrapper.innerHTML = game.message;
   }
+
+  app.appendChild(messageWrapper);
 
   app.appendChild(user2HTML);
   if(user1WeaponHTML){

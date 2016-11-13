@@ -23,7 +23,7 @@ function renderUser(user, score, showAltUsers = false, altUsers, altHandler) {
 
     altUsers.forEach((altUser) => {
       let li = document.createElement('li');
-      li.className = 'alt-users__list-item'
+      li.className = 'alt-users__list-item';
       li.innerHTML = `${altUser.name}`;
       if(altHandler){
         li.onclick = altHandler(user.id, altUser.id);
