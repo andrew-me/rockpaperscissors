@@ -36,6 +36,8 @@ describe('game', () => {
     expect(stateStart).to.equal('start');
 
     let gameDataPlaying = makeDummyGameData();
+    gameDataPlaying = addPlayer(gameDataPlaying, 0);
+    gameDataPlaying = addPlayer(gameDataPlaying, 1);
     gameDataPlaying.iteration = 1;
     const statePlaying = getState(gameDataPlaying);
     expect(statePlaying).to.equal('playing');
@@ -43,9 +45,9 @@ describe('game', () => {
     let gameDataPlaying2 = makeDummyGameData();
     gameDataPlaying2 = addPlayer(gameDataPlaying2, 0);
     gameDataPlaying2 = addPlayer(gameDataPlaying2, 1);
-    gameDataPlaying2.players[0].score = 3;
-    gameDataPlaying2.players[1].score = 3;
-    gameDataPlaying2.iteration = gameDataPlaying2.target + 1;
+    gameDataPlaying2.players[0].score = gameDataPlaying2.target - 1;
+    gameDataPlaying2.players[1].score = gameDataPlaying2.target - 1;
+    gameDataPlaying2.iteration = gameDataPlaying2.target + 3;
     const statePlaying2 = getState(gameDataPlaying2);
     expect(statePlaying2).to.equal('playing');
 
@@ -119,15 +121,15 @@ describe('game', () => {
     gameData = addPlayer(gameData, 1);
     gameData.iteration = gameData.target;
     gameData.players[0].id = 0;
-    gameData.players[0].score = 4;
+    gameData.players[0].score = gameData.target;
 
     play(gameData, 2, 0);
 
     expect(gameData.iteration).to.equal(gameData.target);
-    expect(gameData.players[0].score).to.equal(4);
+    expect(gameData.players[0].score).to.equal(gameData.target);
 	});
 
-  it('should indicate winning player', () => {
+  it('should indicate winning player if target is met', () => {
     let gameData = makeDummyGameData();
     gameData = addPlayer(gameData, 0);
     gameData = addPlayer(gameData, 1);
@@ -166,7 +168,7 @@ describe('game', () => {
 
 function makeDummyGameData() {
   const game = {
-    target: 5,
+    target: 3,
     iteration: 0,
     players: [],
     weapons: null,

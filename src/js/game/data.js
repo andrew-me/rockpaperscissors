@@ -1,5 +1,5 @@
 export const data = {
-  target: 5,
+  target: 3,
   iteration: 0,
   players: [],
   weapons: null,

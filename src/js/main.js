@@ -57,7 +57,7 @@ const switchPlayerAction = function(game){
 
 const doReset = function() {
   reset(game);
-  game.message = `Best of ${game.target} games. Good luck!`;
+  game.message = `First to ${game.target} games. Good luck!`;
   render();
 }
 
@@ -132,5 +132,5 @@ const render = function(){
   }
 }
 
-game.message = `Best of ${game.target} games. Good luck!`;
+game.message = `First to ${game.target} games. Good luck!`;
 render();

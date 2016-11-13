@@ -19,7 +19,7 @@ function iterate(game) {
 
 function reset(game) {
   validateGame(game);
-  game.target = 5;
+  game.target = 3;
   game.message = null;
   game.iteration = 0;
   game.players[0].score = 0;
@@ -92,16 +92,11 @@ function play(game, player1Weapon, player2Weapon) {
 
 function checkIfWinner(game){
   validateGame(game);
-  let winner = null;
 
-  if(game.iteration >= game.target){
-    const player1Score = game.players[0].score;
-    const player2Score = game.players[1].score;
-    if(player1Score === player2Score) return winner;
-    winner = (player1Score > player2Score) ? game.players[0].id : game.players[1].id;
-  }
+  if(game.players[0].score === game.target) return game.players[0].id;
+  if(game.players[1].score === game.target) return game.players[1].id;
 
-  return winner;
+  return null;
 }
 
 function getPlayerScore(game, userId) {
